@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { PrimengModule } from '../primeng/primeng.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    PrimengModule
   ]
 })
 export class AuthModule { }

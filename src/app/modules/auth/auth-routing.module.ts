@@ -8,10 +8,10 @@ const routes: Routes = [
     component: SignInComponent
 
   },
-  {
-    path: '**',
-    redirectTo: 'sign-in'
-  }
+{
+ path: '**',
+ redirectTo: 'sign-in'
+ }
 ];
 
 @NgModule({
