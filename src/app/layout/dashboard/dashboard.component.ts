@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { sidebarItems } from 'src/app/data/const/sideItems.const';
-import { ISidebar } from 'src/app/interfaces/ISidebar.interface';
+import { ISidebar } from 'src/app/data/interfaces/ISidebar.interface';
 
 @Component({
   selector: 'app-dashboard',

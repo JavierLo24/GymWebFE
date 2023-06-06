@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISidebar } from 'src/app/interfaces/ISidebar.interface';
+import { ISidebar } from 'src/app/data/interfaces/ISidebar.interface';
 
 @Component({
   selector: 'app-sidebar',

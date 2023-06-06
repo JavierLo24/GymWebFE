@@ -1,30 +1,30 @@
-import { ISidebar } from "src/app/interfaces/ISidebar.interface";
+import { ISidebar } from "src/app/data/interfaces/ISidebar.interface";
 
 export const sidebarItems: ISidebar[]  = [
   {
       title: 'Clientes',
       icon: 'pi pi-home',
-      link: ['']
+      link: ['/admin/home']
   },
   {
       title: 'Rutinas',
       icon: 'pi pi-file',
-      link: ['']
+      link: ['/admin/rutinas']
   },
   {
       title: 'Ejercicios',
       icon: 'pi pi-heart-fill',
-      link: ['']
+      link: ['/admin/ejercicios']
   },
   {
       title: 'Planes',
       icon: 'pi pi-calendar',
-      link: ['']
+      link: ['/admin/planes']
   },
   {
       title: 'Entrenadores',
       icon: 'pi pi-users',
-      link: ['']
+      link: ['/admin/entrenadores']
   },
 
 

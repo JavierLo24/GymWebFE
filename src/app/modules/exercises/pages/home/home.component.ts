@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent {
       nombre : "Julian Camilo",
       apellido : "Riveros Fonseca",
       plan : "Plan Pobre",
-      fechaInit : "02/06/2023",
+      fechaInit : "03/06/2023",
     },
     {
       nombre : "Angel Yesid",
@@ -33,4 +34,13 @@ export class HomeComponent {
       fechaInit : "02/06/2023",
     },
   ]
+
+
+  public clear(table: Table){
+    table.clear()
+  }
+
+  public filtrar(event:any, table:Table){
+    table.filterGlobal(event.target.value, 'contains');
+  }
 }

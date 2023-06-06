@@ -4,6 +4,7 @@ import { DashNavbarComponent } from './components/dash-navbar/dash-navbar.compon
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { PrimengModule } from '../modules/primeng/primeng.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { PrimengModule } from '../modules/primeng/primeng.module';
     FormsModule,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

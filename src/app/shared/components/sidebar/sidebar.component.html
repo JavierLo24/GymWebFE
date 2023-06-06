@@ -13,10 +13,11 @@
       <ul class="my-6 text-center">
           <li *ngFor="let item of items">
                   <a
-                      routerLinkActive="bg-gray-200"
-                      (click)="item.hidden = !item.hidden"
-                      class="flex items-center justify-between w-full p-3  hover:bg-gray-200 hover:text-black font-semibold hover:font-bold transition-all cursor-pointer">
-                     <span> <i [class]="item.icon" class="mx-3"></i> {{item.title}} </span>
+                    [routerLink]="item.link"  
+                    routerLinkActive="bg-gray-200"
+                    (click)="item.hidden = !item.hidden"
+                    class="flex items-center justify-between w-full p-3  hover:bg-gray-200 hover:text-black font-semibold hover:font-bold transition-all cursor-pointer">
+                    <span> <i [class]="item.icon" class="mx-3"></i> {{item.title}} </span>
 
                   </a>
           </li>
