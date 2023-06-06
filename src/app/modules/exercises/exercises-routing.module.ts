@@ -9,11 +9,11 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'home', component: HomeComponent },
+      {
+        path: '**',
+        redirectTo: 'home'
+       }
     ]
-  },
-  {
-   path: '**',
-   redirectTo: 'home'
   }
 ];
 

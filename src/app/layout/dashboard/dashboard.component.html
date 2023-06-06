@@ -2,10 +2,11 @@
   <div class="w-full">
       <app-dash-navbar (close)="closeNav($event)"></app-dash-navbar>
   </div>
-  <div class="absolute z-[10]  top-0 pt-[100px] md:pt-[70px] left-0  w-60 min-h-[100%] bg-slate-50  border-r-2  border-r-gray-200 transition-all">
+  <div [ngClass]="{'-ml-60': open }" class="absolute z-[10]  top-0 pt-[100px] md:pt-[70px] left-0  w-60 min-h-[100%] bg-slate-50  border-r-2  border-r-gray-200 transition-all">
       <app-sidebar [items]="items"></app-sidebar>
   </div>
-  <div class="transition-all m-4 min-h-screen">
+  <div class="transition-all m-4 min-h-screen"
+  [ngClass]="{'ml-[245px] ': !open}">
       <router-outlet></router-outlet>
   </div>
 
