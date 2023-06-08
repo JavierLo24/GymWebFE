@@ -6,12 +6,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EjerciciosComponent } from './pages/ejercicios/ejercicios.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PlanesComponent } from './pages/planes/planes.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    EjerciciosComponent
+    EjerciciosComponent,
+    PlanesComponent
   ],
   imports: [
     CommonModule,
