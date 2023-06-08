@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.dev';
 
@@ -12,6 +12,9 @@ export class PlanService {
   ) { }
 
   public list(){
-    return this.http.get(`${environment.dev}ejercicios`)
+    const headers = new HttpHeaders({
+      Authorization: localStorage.getItem("jwtToken")!
+    })
+    return this.http.get(`${environment.dev}clientes`,{headers})
   }
 }
