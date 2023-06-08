@@ -7,19 +7,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { EjerciciosComponent } from './pages/ejercicios/ejercicios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlanesComponent } from './pages/planes/planes.component';
+import { EntrenadoresComponent } from './pages/entrenadores/entrenadores.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    EjerciciosComponent,
-    PlanesComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
     ExercisesRoutingModule,
     SharedModule,
-    HttpClientModule
   ]
 })
 export class ExercisesModule { }
