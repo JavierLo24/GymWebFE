@@ -24,6 +24,7 @@ export class AuthService {
     private http: HttpClient,
     private _router: Router,
     private readonly jwtService: JwtService
+
   ) {
     this.userToken = this.jwtService.getToken();
     if (this.userToken != undefined) {

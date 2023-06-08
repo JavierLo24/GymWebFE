@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-   this.plan.list().subscribe(console.log)
+   
   }
 
   public clear(table: Table){

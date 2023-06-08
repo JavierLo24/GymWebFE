@@ -7,6 +7,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from  '@angular/platform-browser/animations'
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations'
     AppRoutingModule,
     AuthModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
