@@ -11,6 +11,18 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'ejercicios',
+    component: EjerciciosComponent
+  },
+  {
+    path: 'planes',
+    component: PlanesComponent
+  },
+  {
+    path: 'entrenadores',
+    component: EntrenadoresComponent
+  },
+  {
     path: '**',
     redirectTo: 'home'
    }

@@ -13,12 +13,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    EntrenadoresComponent,
+    EjerciciosComponent,
+    PlanesComponent
   ],
   imports: [
     CommonModule,
     ExercisesRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class ExercisesModule { }

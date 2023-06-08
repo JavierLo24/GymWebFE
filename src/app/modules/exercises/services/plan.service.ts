@@ -27,7 +27,7 @@ public listPlanes(): Observable<Planes[]> {
   // Autorización como ADMIN del token para ejecutar el método
   const httpOptions = {
     headers: new HttpHeaders({
-      Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwiaWRVc2VyIjoxLCJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2ODYyNDI5NjIsImV4cCI6MTY4NjMyOTM2Mn0.6gTKEgvNDyEZa7tl8hiGcQVhFboacC7B6OZMMWYxl1S5KiYL_dWh0AJi5JOPYfZskFCMj_BitxvtfzNytf1HTg",
+      Authorization: "this.jwt.getToken()",
     }),
   };
   return this.http.get<Planes[]>(url, httpOptions);
