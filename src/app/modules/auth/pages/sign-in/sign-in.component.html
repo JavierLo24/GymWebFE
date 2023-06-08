@@ -1,46 +1,48 @@
 <div class="bodyLog">
-  <form  autocomplete="off" >
+  <form  autocomplete="off" [formGroup]="singinForm" (ngSubmit)="login()">
     <!-- Contenedor card -->
-  <div class="flex justify-center items-center min-h-screen w-[90%] max-w-[700px] mx-auto ">
-    <div class="rounded-md bg-white  w-full">
-      <!-- Your content goes here -->
+    <div class="flex justify-center items-center min-h-screen w-[90%] max-w-[700px] mx-auto ">
+      <div class="rounded-md bg-white  w-full">
+        <!-- Your content goes here -->
         <div class="py-10 px-6 bg-white rounded-lg">
-        <div class="text-center text- text-black  font-roboto md:m-auto">
-          <p class="text-2xl font-bold">Iniciar sesion</p>
-          <span class="text-5xl font-bold">POWERGYM</span>
-  <!-- Input correo -->
-            <div class="my-7">
-              <span class="p-float-label">
-                <input
-                  class="w-full"
-                  pInputText
-                  id="email"
-                  placeholder="entrenador@gmail.com"
-                  formControlName="email"
-                  autocomplete="off"
-                />
-                <label for="email">Correo</label>
-              </span>
+          <div class="text-center text- text-black  font-roboto md:m-auto">
+            <p class="text-2xl font-bold">Iniciar sesion</p>
+            <span class="text-5xl font-bold">POWERGYM</span>
+              <!-- Input correo -->
+              <div class="my-7">
+                <span class="p-float-label">
+                  <input
+                    class="w-full"
+                    pInputText
+                    id="email"
+                    placeholder="entrenador@gmail.com"
+                    formControlName="email"
+                    autocomplete="off"
+                  />
+                  <label for="email">Correo</label>
+                </span>
+              </div>
+              <!-- Input contraseña -->
+              <div class="my-7">
+                <span class="p-float-label">
+                  <p-password
+                    formControlName="password"
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                    autocomplete="off"
+                  ></p-password>
+                  <label for="password">Contraseña</label>
+                </span>
+              </div>
+            <!-- Contenedor iniciar sesion -->
+            <div class="">
+              <button type="submit" class="py-4 px-5 rounded-lg bg-black text-white">
+                Iniciar sesion</button>
             </div>
-  <!-- Input contraseña -->
-            <div class="my-7">
-              <span class="p-float-label">
-                <p-password
-
-                  [style]="{ width: '100%' }"
-                  [inputStyle]="{ width: '100%' }"
-                  autocomplete="off"
-                ></p-password>
-                <label for="password">Contraseña</label>
-              </span>
-            </div>
-          <!-- Contenedor iniciar sesion -->
-          <div class="">
-            <button class="py-4 px-5 rounded-lg bg-black text-white">
-               Iniciar sesion</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
+</div>
 

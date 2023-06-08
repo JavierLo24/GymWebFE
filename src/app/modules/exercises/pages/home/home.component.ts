@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
+import { PlanService } from '../../services/plan.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
 
   public customers :any = [
     {
@@ -35,6 +37,13 @@ export class HomeComponent {
     },
   ]
 
+  constructor(
+    private plan: PlanService
+  ){}
+
+  ngOnInit(): void {
+   this.plan.list().subscribe(console.log)
+  }
 
   public clear(table: Table){
     table.clear()
