@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from  '@angular/platform-browser/animations'
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PrimengModule } from './modules/primeng/primeng.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule,
+    PrimengModule
   ],
   providers: [],
   bootstrap: [AppComponent]

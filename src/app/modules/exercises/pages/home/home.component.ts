@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { PlanService } from '../../services/plan.service';
+import { ClientesService } from '../../services/clientes.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -9,40 +11,40 @@ import { PlanService } from '../../services/plan.service';
 })
 export class HomeComponent implements OnInit{
 
+  public visible: boolean = false;
 
-  public customers :any = [
-    {
-      nombre : "Julian Camilo",
-      apellido : "Riveros Fonseca",
-      plan : "Plan Pobre",
-      fechaInit : "03/06/2023",
-    },
-    {
-      nombre : "Angel Yesid",
-      apellido : "Duque Cruz",
-      plan : "Plan Noob",
-      fechaInit : "02/06/2023",
-    },
-    {
-      nombre : "Javier Andres",
-      apellido : "Lopez Ortega",
-      plan : "Plan Pro",
-      fechaInit : "02/06/2023",
-    },
-    {
-      nombre : "Gerson Israel",
-      apellido : "Diaz de la garza",
-      plan : "Plan Pobre",
-      fechaInit : "02/06/2023",
-    },
+  //arreglo de clientes
+  public clientes :any = [
+ 
+  ]
+  // formulario para inscribir a un nuevo clinete
+  public clienteForm: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required]],
+    genero: ['', [Validators.required]],
+    peso: ['', [Validators.required]],
+    altura: ['', [Validators.required]],
+    fechaNacimiento: ['', [Validators.required]],
+    mensualidad: ['', [Validators.required]],
+  })
+
+  // genero
+  public sexoSelect = [
+    { sex: "Maculino"},
+    { sex: "Femenino"},
   ]
 
+
   constructor(
-    private plan: PlanService
+    private clienteService: ClientesService,
+    private fb: FormBuilder
   ){}
 
   ngOnInit(): void {
-   
+   this.clienteService.listClientes().subscribe({
+    next: res => {
+      this.clientes = res;
+    }
+   })
   }
 
   public clear(table: Table){
@@ -52,4 +54,27 @@ export class HomeComponent implements OnInit{
   public filtrar(event:any, table:Table){
     table.filterGlobal(event.target.value, 'contains');
   }
+
+  public showDialog() {
+    this.visible = true;
+  }
+
+  public registrar(){
+    const cliente = {
+      nombre: this.clienteForm.get('nombre')?.value,
+      peso: this.clienteForm.get('peso')?.value,
+      altura: this.clienteForm.get('altura')?.value,
+      fechaInicioMensualidad: this.clienteForm.get('mensualidad')?.value,
+      fechaNacimiento: this.clienteForm.get('fechaNacimiento')?.value,
+      genero: this.clienteForm.get('genero')?.value,
+    }
+    
+    this.clienteService.registerCliente(cliente).subscribe({
+      next: res => {
+        window.location.reload()
+      }
+    })
+
+  }
+
 }

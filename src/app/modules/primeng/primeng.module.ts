@@ -3,8 +3,11 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -17,8 +20,11 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    DropdownModule,
     TableModule,
+    DialogModule,
+    DropdownModule,
+    RadioButtonModule,
+    InputNumberModule
   ]
 })
 export class PrimengModule { }
