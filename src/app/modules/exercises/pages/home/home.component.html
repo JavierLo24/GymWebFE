@@ -15,13 +15,13 @@
 
         <p-table 
             #dt1
-            [value]="customers" 
+            [value]="clientes" 
             [tableStyle]="{ 'min-width': '50rem'}" 
             [styleClass]="'p-datatable-sm'"
             [rowsPerPageOptions]="[5,10, 25, 50]"
             [paginator]="true"
             [rows]="5"
-            [globalFilterFields]="['nombre', 'plan', 'apellido', 'fechaInit']"
+            [globalFilterFields]="['nombre']"
             [rowHover]="true"
             >
             
@@ -29,6 +29,9 @@
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div>
                         <button pButton label="limpiar" class="" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                    </div>
+                    <div>
+                        <button pButton label="Añadir" class="" icon="pi pi-filter-slash" (click)="visible = true"></button>
                     </div>
                     <div class="p-input-icon-left ml-auto">
                         <i class="pi pi-search"></i>
@@ -40,32 +43,92 @@
               <ng-template pTemplate="header">
                   <tr >
                       <th pSortableColumn="nombre">Nombre</th>
-                      <th pSortableColumn="plan">Plan</th>
-                      <th pSortableColumn="fechaInit">Fecha de inicio</th>
-                      <th>Ver Informacion</th>
+                      <th pSortableColumn="fechaInit">Genero</th>
+                      <th pSortableColumn="fechaInit">Peso</th>
+                      <th pSortableColumn="fechaInit">Estatura</th>
+                      <th pSortableColumn="plan">Inicio de mensualidad </th>
                       <th>Rutinas</th>
                   </tr>
               </ng-template>
               <ng-template pTemplate="body" let-user>
                   <tr>
-                      <td>{{ user.nombre }} {{ user.apellido }} </td>
-                      <td>{{ user.plan }}</td>
-                      <td>{{ user.fechaInit }}</td>
-                      <td>
-                            <a [routerLink]="" class="flex text-white items-center justify-center gap-2 p-2 rounded-md  bg-[#ff7b00]  hover:bg-[#ff8800] transition-colors">
-                                <i class="pi pi-eye"></i>
-                                Ver info
-                            </a>
-                     </td>
+                      <td>{{ user.nombre | titlecase }}</td>
+                      <td>{{ user.genero }}</td>
+                      <td>{{ user.peso }}</td>
+                      <td>{{ user.altura }}</td>
+                      <td>{{ user.fechaInicioMensualidad | date }}</td>
                       <td>
                           <a [routerLink]="" class="flex items-center justify-center gap-2 p-2 rounded-md text-white bg-[#1b4332] transition-colors hover:bg-[#2d6a4f]">
                               <i class="pi pi-pencil"></i>
                               Asignar rutina
                           </a>
                       </td>
+                      <div>
+                       
+                    </div>
                   </tr>
               </ng-template>
           </p-table>
       </div>
+</div>
 
-  </div>
+<!-- modal para registrar un cliente -->
+<p-dialog header="Registro de un nuevo Cliente" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div class="my-4">
+        <form [formGroup]="clienteForm" >
+            <div>
+                <!-- nombre  -->
+                <div class="mb-4">
+                    <label for="" class="inline-block py-2">Nombre del cliente</label>
+                    <div class="p-fluid">
+                        <input pInputText type="text" class="" placeholder="Pepito perez" formControlName="nombre">
+                    </div>
+                </div>
+                <!-- genero -->
+                <div>
+                    <label class="inline-block mb-3">Genero</label>
+                    <div class="flex gap-6">
+                        <div *ngFor="let sexo of sexoSelect" class="field-checkbox ">
+                            <div class="mb-3 ">
+                                <p-radioButton [inputId]="sexo.sex"  [value]="sexo.sex" formControlName="genero"> </p-radioButton>
+                                <label [for]="sexo.sex" class="ml-2">{{ sexo.sex }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- peso y estatura -->
+                <div class="flex gap-4">
+                    <div class="p-fluid">
+                        <label for="" class="inline-block py-2">Peso(kg)</label>
+                        <div class="p-fluid">
+                            <p-inputNumber inputId="integeronly" formControlName="peso" placeholder="60" [maxFractionDigits]="2" mode="decimal" locale="es-CO"></p-inputNumber>
+                        </div>
+                    </div>
+                    <div class="p-fluid">
+                        <label for="" class="inline-block py-2">Altura(m)</label>
+                        <div class="p-fluid">
+                            <p-inputNumber inputId="integeronly" formControlName="altura" placeholder="1.90" [maxFractionDigits]="2" mode="decimal" locale="es-CO"></p-inputNumber>
+                        </div>
+                    </div>
+                </div>
+                <!-- nacimiento y registro -->
+                <div class="flex  gap-4">
+                    <div class="p-fluid">
+                        <label for="" class="inline-block py-2">Fecha de nacimiento</label>
+                        <div class="p-fluid border">
+                            <input  type="date" class="" placeholder="60" formControlName="fechaNacimiento">
+                        </div>
+                    </div>
+                    <div class="p-fluid">
+                        <label for="" class="inline-block py-2">Inicio de Mensualidad</label>
+                        <div class="p-fluid border">
+                            <input  type="date" class="" placeholder="1.90" formControlName="mensualidad" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p-button type="submit" icon="pi pi-check" (click)="visible = false; registrar()" label="Registrar" styleClass="p-button-text"></p-button>
+        </form>
+    </div>
+
+</p-dialog>
