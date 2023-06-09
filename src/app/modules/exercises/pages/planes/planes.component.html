@@ -1,8 +1,101 @@
-<div class="flex flex-row" *ngFor="let plan of planes">
-<div class="text-center border-2 border-black rounded-lg mb-5 p-4">
-  {{plan.nombre}}
-  <div class="mb-5 p-4">{{plan.descripcion}}
-    <div class="mt-4">{{plan.precio}}</div>
-  </div></div>
+<div
+  class="flex max-w-[95%] lg:max-w-[70%] mx-auto"
+  *ngFor="let plan of planes">
+  <!-- Cards con los planes -->
+  <div class="text-center shadow-xl rounded-lg mb-5 p-4">
+    <div class="flex flex-col">
+      <span class="text-zinc-900 font-bold">Nombre del plan: </span>
+      <span class="">{{ plan.nombre }}</span>
+    </div>
+    <div class="flex flex-col my-5 px-3">
+      <span class="text-zinc-900 font-bold">Descripcion del plan: </span>
+      {{ plan.descripcion }}
+    </div>
 
+    <div class="flex flex-col mt-4">
+      <span class="text-zinc-900 font-bold">Precio del plan: </span>
+      ${{ plan.precio }}
+    </div>
+
+    <button
+      class="px-5 py-3 mt-3 text-white max-w-min mx-auto rounded-lg bg-neutral-700"
+      (click)="modal( plan.id )">
+      Editar
+    </button>
+  </div>
+</div>
+
+<!-- Modal para editar -->
+
+<div
+  class="bodyLog w-full fixed z-50 top-0 left-0 p-4 bg-shadow overflow-y-auto flex justify-center"
+  *ngIf="ocultar">
+<div>
+  <form  autocomplete="off" [formGroup]="planForm">
+    <!-- Contenedor card -->
+    <div class="flex justify-center items-center min-h-screen w-[90%] max-w-[700px] mx-auto ">
+      <div class="rounded-md bg-white w-full">
+        <!-- Your content goes here -->
+        <div class="py-10 px-6 bg-white rounded-lg">
+          <div class="text-center text- text-black font-roboto md:m-auto">
+            <p class="text-2xl font-bold">Editar plan</p>
+
+              <!-- Input nombre -->
+              <div class="my-7">
+                <span class="p-float-label">
+                  <input
+                    class="w-full"
+                    pInputText
+                    id="nombre"
+                    formControlName="nombre"
+                    autocomplete="off"
+                  />
+                  <label for="nombre">Nombre:</label>
+                </span>
+              </div>
+              <!-- Input descripcion -->
+              <div class="my-7">
+                <span class="p-float-label">
+                  <textarea
+                  pInputText
+                  formControlName="descripcion"
+                  id="descripcion"
+                  cols="30"
+                  rows="7"
+                  class="w-full border-black border rounded-md outline-none p-2 resize-none"
+                ></textarea>
+                  <label for="descripcion">Descripcion:</label>
+                </span>
+              </div>
+              <!-- Input precio -->
+              <div class="my-7">
+                <span class="p-float-label">
+                  <input
+                    class="w-full"
+                    pInputText
+                    type="number"
+                    id="precio"
+                    placeholder="$"
+                    formControlName="precio"
+                    autocomplete="off"
+                  />
+                  <label for="precio">Precio:</label>
+                </span>
+              </div>
+            <!-- Contenedor iniciar sesion -->
+            <div class="">
+              <button type="submit" (click)="editPlan()" class="px-5 py-3 mt-3 mr-5 text-white max-w-min mx-auto rounded-lg bg-neutral-700 hover:bg-neutral-800">
+                Guardar</button>
+                <button
+                class="px-5 py-3 mt-3 text-white max-w-min mx-auto rounded-lg bg-neutral-700 hover:bg-neutral-800"
+                (click)="modal(-1)">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 </div>
