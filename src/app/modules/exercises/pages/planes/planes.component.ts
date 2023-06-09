@@ -32,10 +32,10 @@ export class PlanesComponent implements OnInit {
     ) {}
 
   /**
-   * Método para listar a todos los usuarios PERSONAL/AUXILIARES que trae el servicio
+   * Método para listar a todos los planes que trae el servicio
    *
    * @params
-   * @return un listado con los usuarios PERSONAL/AUXILIARES
+   * @return un listado con los planes
    */
   getPlanes(): void {
     this._planesService.listPlanes().subscribe((planes) => {

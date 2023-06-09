@@ -44,6 +44,7 @@
         <p-table [value]="trainers" [paginator]="true" [rows]="5">
           <ng-template pTemplate="header">
             <tr>
+              <th>Código</th>
               <th>Nombre</th>
               <th>Correo</th>
               <th>Acciones</th>
@@ -51,14 +52,15 @@
           </ng-template>
           <ng-template pTemplate="body" let-user let-i="rowIndex">
             <tr class="even:bg-slate-300">
-              <!-- Columna solo visual para tener el conteo de entrenadores -->
-              <td>{{ user.nombre }}</td>
+              <!-- Columna solo visual para tener el conteo de auxiliares -->
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.nombre}}</td>
               <td>{{ user.correo }}</td>
               <td
                 class="flex flex-col justify-center gap-2 lg:flex-row lg:items-center"
               >
                 <button
-                  (click)="deleteAttendant(user.email)"
+                  (click)="deleteTrainers(user.correo)"
                   class="flex items-center justify-center gap-2 p-2 rounded-md text-white bg-red-500 transition-colors hover:bg-red-700"
                 >
                   <i class="pi pi-trash"></i>
@@ -70,7 +72,7 @@
         <!-- Contenedor para el contador del total de entrenadores -->
         <div class="py-4">
           <p class="font-semibold">
-            Total de Entrenadores: {{ filteredUser.length }}
+            Total de Entrenadores: {{ trainers.length }}
           </p>
         </div>
       </div>
@@ -79,11 +81,13 @@
 </div>
 
 <!-- Contenedor del modal -->
+<div class="bodylog">
 <div
-  class="w-full min-h-[100%] modal absolute z-50 top-0 left-0 flex items-center justify-center transition-transform"
+  class="bg-gray-500/30 w-full min-h-[100%] modal absolute z-50 top-0 left-0 flex items-center justify-center transition-transform"
   *ngIf="triggerModal"
 >
   <!-- Contenedor de la informacion del modal -->
+
   <div class="w-11/12 bg-white max-w-[600px] rounded-md">
     <!-- Encabezado -->
     <div class="border-b">
@@ -93,6 +97,17 @@
     <div class="p-4">
       <form [formGroup]="registerForm">
         <div class="mb-10">
+          <!-- Nombre -->
+          <div class="mb-4">
+            <label for="nombre" class="py-3 font-bold">Nombre</label>
+            <input
+              formControlName="nombre"
+              type="nombre"
+              id="nombre"
+              placeholder="pepito perez..."
+              class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
+            />
+          </div>
           <!-- Correo -->
           <div class="mb-4">
             <label for="email" class="py-3 font-bold">Correo</label>
@@ -126,7 +141,7 @@
               'bg-gray-300 cursor-not-allowed': registerForm.invalid,
               'bg-green-600 hover:bg-green-700 ': !registerForm.invalid
             }"
-            (click)="saveUser()"
+            (click)="saveTrainer()"
           >
             Agregar
           </button>
@@ -140,4 +155,5 @@
       </form>
     </div>
   </div>
+</div>
 </div>
