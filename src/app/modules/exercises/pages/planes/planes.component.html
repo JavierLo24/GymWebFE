@@ -1,27 +1,38 @@
-<div
-  class="flex max-w-[95%] lg:max-w-[70%] mx-auto"
-  *ngFor="let plan of planes">
-  <!-- Cards con los planes -->
-  <div class="text-center shadow-xl rounded-lg mb-5 p-4">
-    <div class="flex flex-col">
-      <span class="text-zinc-900 font-bold">Nombre del plan: </span>
-      <span class="">{{ plan.nombre }}</span>
-    </div>
-    <div class="flex flex-col my-5 px-3">
-      <span class="text-zinc-900 font-bold">Descripcion del plan: </span>
-      {{ plan.descripcion }}
-    </div>
+<div class="bg-white shadow-md border-t-2 border-zinc-500 rounded-md mb-6">
+  <!-- encabezado -->
+  <div class="border-gray-400 border-b ">
+      <h3 class=" flex items-center text-xl  p-4">
+          <i class="pi pi-eye mr-3"></i>
+          Listado de Planes
+      </h3>
+  </div>
+</div>
+<div class="grid-p">
+  <div
+    class=""
+    *ngFor="let plan of planes">
+    <!-- Cards con los planes -->
+    <div class="text-center shadow-xl rounded-lg mb-5 p-4">
+      <div class="flex flex-col">
+        <span class="text-zinc-900 font-bold">Nombre del plan: </span>
+        <span class="">{{ plan.nombre }}</span>
+      </div>
+      <div class="flex flex-col my-5 px-3">
+        <span class="text-zinc-900 font-bold">Descripcion del plan: </span>
+        {{ plan.descripcion }}
+      </div>
 
-    <div class="flex flex-col mt-4">
-      <span class="text-zinc-900 font-bold">Precio del plan: </span>
-      ${{ plan.precio }}
-    </div>
+      <div class="flex flex-col mt-4">
+        <span class="text-zinc-900 font-bold">Precio del plan: </span>
+        ${{ plan.precio }}
+      </div>
 
-    <button
-      class="px-5 py-3 mt-3 text-white max-w-min mx-auto rounded-lg bg-neutral-700"
-      (click)="modal( plan.id )">
-      Editar
-    </button>
+      <button
+        class="px-5 py-3 mt-3 text-white max-w-min mx-auto rounded-lg bg-neutral-700"
+        (click)="modal( plan.id )">
+        Editar
+      </button>
+    </div>
   </div>
 </div>
 

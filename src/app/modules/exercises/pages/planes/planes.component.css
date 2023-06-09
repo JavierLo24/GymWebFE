@@ -5,3 +5,10 @@
   background-position: center center;
   background-attachment: fixed;
 }
+
+.grid-p {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: center;
+  align-items: center;
+}
