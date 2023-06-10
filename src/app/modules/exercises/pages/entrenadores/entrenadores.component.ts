@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/data/interfaces/Usuarios.interface';
 import Swal from 'sweetalert2';
 import { TrainerService } from '../../services/trainer.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-entrenadores',
@@ -14,7 +15,7 @@ export class EntrenadoresComponent implements OnInit{
   public nameUserByFilter = '';
   public controlEditOrCreateUser = 0;
   public filteredUser: [] = [];
-
+  public visible: boolean = false;
   public trainers: Usuario[] = [];
 
   public registerForm: FormGroup = this._fb.group({
@@ -30,6 +31,18 @@ export class EntrenadoresComponent implements OnInit{
 
     ngOnInit(): void {
       this.getTrainers();
+    }
+
+    public clear(table: Table){
+      table.clear()
+    }
+
+    public filtrar(event:any, table:Table){
+      table.filterGlobal(event.target.value, 'contains');
+    }
+
+    public showDialog() {
+      this.visible = true;
     }
 
   /**
@@ -51,7 +64,6 @@ export class EntrenadoresComponent implements OnInit{
    * @return recarga la lista con el entrenador eliminado
    */
   public deleteTrainers(email: string) {
-    // Mini modal de confirmacion
     Swal.fire({
       title: '¿Estás seguro de que desea eliminar al usuario seleccionado?',
       text: 'Esta acción no se puede deshacer',
@@ -109,13 +121,4 @@ export class EntrenadoresComponent implements OnInit{
     });
   }
 
-  /**
-   * Método para buscar a un entrenador
-   *
-   * @params Correo del entrenador a buscar
-   * @return El entrenador solicitado
-   */
-  public findUser() {
-    // El buscador para ubicar por el email
-  }
 }

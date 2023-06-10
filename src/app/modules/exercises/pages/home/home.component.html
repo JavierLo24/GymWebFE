@@ -5,7 +5,7 @@
         <!-- encabezado -->
         <div class="border-gray-400 border-b ">
             <h3 class=" flex items-center text-xl  p-4">
-                <i class="pi pi-eye mr-3"></i>
+                <i class="pi pi-home mr-3"></i>
                 Listado de Clientes
             </h3>
         </div>
@@ -13,10 +13,10 @@
       <!-- Contenedor para la tabla  -->
       <div class="bg-gray-100 p-3 shadow-md">
 
-        <p-table 
+        <p-table
             #dt1
-            [value]="clientes" 
-            [tableStyle]="{ 'min-width': '50rem'}" 
+            [value]="clientes"
+            [tableStyle]="{ 'min-width': '50rem'}"
             [styleClass]="'p-datatable-sm'"
             [rowsPerPageOptions]="[5,10, 25, 50]"
             [paginator]="true"
@@ -24,14 +24,14 @@
             [globalFilterFields]="['nombre']"
             [rowHover]="true"
             >
-            
+
             <ng-template pTemplate="caption">
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                        <button pButton label="limpiar" class="" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                        <button pButton label="limpiar" class="p-button-secondary" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
                     </div>
                     <div>
-                        <button pButton label="Añadir" class="" icon="pi pi-filter-slash" (click)="visible = true"></button>
+                        <button pButton label="Añadir" class="p-button-secondary" icon="pi pi-plus" (click)="visible = true"></button>
                     </div>
                     <div class="p-input-icon-left ml-auto">
                         <i class="pi pi-search"></i>
@@ -64,7 +64,7 @@
                           </a>
                       </td>
                       <div>
-                       
+
                     </div>
                   </tr>
               </ng-template>

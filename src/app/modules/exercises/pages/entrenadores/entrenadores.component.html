@@ -1,53 +1,48 @@
 <div class="m-2">
   <!-- title -->
-  <div>
-    <h1 class="font-bold text-2xl mb-4">Entrenadores</h1>
-  </div>
-  <!-- motor de busqueda -->
-  <div class="mb-4">
-    <!-- Contenedor General -->
-    <div
-      class="flex justify-between items-center rounded-md bg-white relative mb-4 shadow-lg"
-    >
-      <!-- Contenedor del buscado -->
-      <input
-        type="text"
-        placeholder="Buscar entrenador..."
-        class="py-3 px-6 w-full rounded-md outline-none inputPersonal"
-        (input)="findUser()"
-        [(ngModel)]="nameUserByFilter"
-      />
-      <div class="pr-6 absolute right-0">
-        <i class="pi pi-search"></i>
-      </div>
+  <div class="bg-white shadow-md border-t-2 border-zinc-500 rounded-md mb-6">
+    <!-- encabezado -->
+    <div class="border-gray-400 border-b ">
+        <h3 class=" flex items-center text-xl  p-4">
+            <i class="pi pi-users mr-3"></i>
+            Listado de Entrenadores
+        </h3>
     </div>
-    <div class="">
-      <button
-        class="block bg-green-600 ml-auto py-2 px-8 text-white rounded-md font-semibold hover:bg-green-700 transition-colors"
-        (click)="controlEditOrCreateUser = -1; triggerModal = true"
-      >
-        Agregar
-      </button>
-    </div>
-  </div>
-
+</div>
   <!-- Tabla de listado de entrenadores -->
 
   <div class="shadow-lg bg-white">
-    <div class="mb-2 border-b border-grey-600">
-      <h2 class="py-3 px-4 font-semibold">Listado de entrenadores</h2>
-    </div>
     <!-- Contenedor para la tabla -->
     <div class="py-2">
       <!-- Contenedor para mostrar las data -->
       <div class="px-4">
-        <p-table [value]="trainers" [paginator]="true" [rows]="5">
+        <p-table
+        #dt1
+        [value]="trainers"
+        [paginator]="true"
+        [rows]="5"
+        [globalFilterFields]="['nombre']"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                  <button pButton label="Limpiar" class="p-button-secondary" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+              </div>
+              <div>
+                  <button pButton label="Añadir" class="p-button-secondary" icon="pi pi-plus" (click)="triggerModal = true"></button>
+              </div>
+              <div class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="filtrar($event, dt1)" placeholder="Buscar por nombre" />
+              </div>
+          </div>
+      </ng-template>
           <ng-template pTemplate="header">
             <tr>
               <th>Código</th>
               <th>Nombre</th>
               <th>Correo</th>
-              <th>Acciones</th>
+              <th style="width: 5rem"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-user let-i="rowIndex">
@@ -56,14 +51,11 @@
               <td>{{ i + 1 }}</td>
               <td>{{ user.nombre}}</td>
               <td>{{ user.correo }}</td>
-              <td
-                class="flex flex-col justify-center gap-2 lg:flex-row lg:items-center"
-              >
-                <button
+              <td class="flex justify-start gap-2 flex-row">
+                <button pButton label="Eliminar"
                   (click)="deleteTrainers(user.correo)"
-                  class="flex items-center justify-center gap-2 p-2 rounded-md text-white bg-red-500 transition-colors hover:bg-red-700"
-                >
-                  <i class="pi pi-trash"></i>
+                  class="p-button-danger"
+                  icon="pi pi-trash">
                 </button>
               </td>
             </tr>
@@ -87,7 +79,6 @@
   *ngIf="triggerModal"
 >
   <!-- Contenedor de la informacion del modal -->
-
   <div class="w-11/12 bg-white max-w-[600px] rounded-md">
     <!-- Encabezado -->
     <div class="border-b">
@@ -104,7 +95,7 @@
               formControlName="nombre"
               type="nombre"
               id="nombre"
-              placeholder="pepito perez..."
+              placeholder="Nombre"
               class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
             />
           </div>
@@ -115,7 +106,7 @@
               formControlName="email"
               type="email"
               id="email"
-              placeholder="pepito perez..."
+              placeholder="a@a.com"
               class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
             />
           </div>
@@ -128,6 +119,7 @@
               formControlName="password"
               type="password"
               id="password"
+              placeholder="*******"
               class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
             />
           </div>
@@ -139,7 +131,7 @@
             [disabled]="registerForm.invalid"
             [ngClass]="{
               'bg-gray-300 cursor-not-allowed': registerForm.invalid,
-              'bg-green-600 hover:bg-green-700 ': !registerForm.invalid
+              'bg-zinc-600 hover:bg-zinc-700 ': !registerForm.invalid
             }"
             (click)="saveTrainer()"
           >

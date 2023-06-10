@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CardModule } from 'primeng/card';
 
 
 
@@ -24,7 +25,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DialogModule,
     DropdownModule,
     RadioButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    CardModule
   ]
 })
 export class PrimengModule { }

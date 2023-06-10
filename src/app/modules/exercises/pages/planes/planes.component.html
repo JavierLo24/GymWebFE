@@ -1,8 +1,8 @@
 <div class="bg-white shadow-md border-t-2 border-zinc-500 rounded-md mb-6">
-  <!-- encabezado -->
+  <!-- Encabezado del listado -->
   <div class="border-gray-400 border-b ">
       <h3 class=" flex items-center text-xl  p-4">
-          <i class="pi pi-eye mr-3"></i>
+          <i class="pi pi-calendar mr-3"></i>
           Listado de Planes
       </h3>
   </div>
@@ -12,19 +12,19 @@
     class=""
     *ngFor="let plan of planes">
     <!-- Cards con los planes -->
-    <div class="text-center shadow-xl rounded-lg mb-5 p-4">
+    <div class="text-center shadow-xl rounded-lg mb-5 p-4 bg-[url('/assets/mancuerna.png')] bg-contain bg-no-repeat bg-center">
       <div class="flex flex-col">
         <span class="text-zinc-900 font-bold">Nombre del plan: </span>
-        <span class="">{{ plan.nombre }}</span>
+        <span class="text-xl">{{ plan.nombre }}</span>
       </div>
       <div class="flex flex-col my-5 px-3">
         <span class="text-zinc-900 font-bold">Descripcion del plan: </span>
-        {{ plan.descripcion }}
+        <p class="text-xl">{{ plan.descripcion }}</p>
       </div>
 
       <div class="flex flex-col mt-4">
         <span class="text-zinc-900 font-bold">Precio del plan: </span>
-        ${{ plan.precio }}
+        <p class="text-xl">${{ plan.precio }}</p>
       </div>
 
       <button
@@ -43,10 +43,8 @@
   *ngIf="ocultar">
 <div>
   <form  autocomplete="off" [formGroup]="planForm">
-    <!-- Contenedor card -->
     <div class="flex justify-center items-center min-h-screen w-[90%] max-w-[700px] mx-auto ">
       <div class="rounded-md w-full">
-        <!-- Your content goes here -->
         <div class="py-10 px-6 bg-white rounded-lg min-w-[600px]">
           <div class="text-center text- text-black font-roboto md:m-auto">
             <p class="text-2xl font-bold">Editar plan</p>
@@ -93,9 +91,14 @@
                   <label for="precio">Precio:</label>
                 </span>
               </div>
-            <!-- Contenedor iniciar sesion -->
+            <!-- Contenedor guardar el edit -->
             <div class="">
-              <button type="submit" (click)="editPlan()" class="px-5 py-3 mt-3 mr-5 text-white max-w-min mx-auto rounded-lg bg-neutral-700 hover:bg-neutral-800">
+              <button type="submit" (click)="editPlan()" class="px-5 py-3 mt-3 mr-5 text-white max-w-min mx-auto rounded-lg"
+              [disabled]="planForm.invalid"
+              [ngClass]="{
+                'bg-gray-300 cursor-not-allowed': planForm.invalid,
+                'bg-zinc-600 hover:bg-zinc-700 ': !planForm.invalid
+              }">
                 Guardar</button>
                 <button
                 class="px-5 py-3 mt-3 text-white max-w-min mx-auto rounded-lg bg-neutral-700 hover:bg-neutral-800"
