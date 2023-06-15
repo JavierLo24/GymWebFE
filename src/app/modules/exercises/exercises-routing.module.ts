@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { EjerciciosComponent } from './pages/ejercicios/ejercicios.component';
 import { PlanesComponent } from './pages/planes/planes.component';
 import { EntrenadoresComponent } from './pages/entrenadores/entrenadores.component';
+import { RutinasComponent } from './pages/rutinas/rutinas.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'entrenadores',
     component: EntrenadoresComponent
+  },
+  {
+    path: 'rutinas',
+    component: RutinasComponent
   },
   {
     path: '**',

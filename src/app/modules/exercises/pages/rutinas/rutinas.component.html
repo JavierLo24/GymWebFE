@@ -1,0 +1,24 @@
+<div class="p-4">
+
+    <div>
+        <h2>Listado de rutinas.</h2>
+    </div>
+
+</div>
+
+
+<p-dialog header="Añade los ejercicios a la rutian" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+    <div class="card">
+        <p-pickList [source]="listaEjercicios" [target]="listaEjerciciosRutinas" sourceHeader="Lista de ejercicios" targetHeader="Seleccionados" [dragdrop]="true" 
+            [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }" breakpoint="1400px">
+            <ng-template let-ejercicio pTemplate="item">
+                <div class="flex flex-wrap p-2 items-center gap-3 bg-slate-100 rounded-md">
+                    <img class="w-16 rounded-md" src="{{ejercicio.urlGif}}" alt="{item.name}" />
+                    <div class=" flex gap-2">
+                        <span class="font-bold">{{ ejercicio.descripcion }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-pickList>
+    </div>
+</p-dialog>

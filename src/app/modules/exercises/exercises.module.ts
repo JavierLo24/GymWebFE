@@ -10,13 +10,15 @@ import { EntrenadoresComponent } from './pages/entrenadores/entrenadores.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from '../primeng/primeng.module';
 import { SharedModule } from 'primeng/api';
+import { RutinasComponent } from './pages/rutinas/rutinas.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     EntrenadoresComponent,
     EjerciciosComponent,
-    PlanesComponent
+    PlanesComponent,
+    RutinasComponent
   ],
   imports: [
     CommonModule,
