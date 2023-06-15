@@ -1,40 +1,80 @@
 <div class="p-4">
     <!-- header -->
-    <div class="bg-white shadow-md border-t-2 border-zinc-500 rounded-md mb-6">
+    <div class="bg-white shadow-md border-t-2 p-4 border-b border-zinc-500 rounded-md mb-6 flex items-center justify-between">
       <!-- encabezado -->
-      <div class="border-gray-400 border-b ">
-          <h3 class=" flex items-center text-xl  p-4">
+      <div class="border-gray-400  ">
+          <h3 class=" flex items-center text-xl  ">
               <i class="pi pi-eye mr-3"></i>
               Listado de Ejercicios
           </h3>
       </div>
+      <div>
+        <p-button (onClick)="visible = true">Añadir ejercicio</p-button>
+      </div>
   </div>
 
     <!-- Tabla de ejercicios -->
-    <p-table [value]="ejercicios" [paginator]="true" [rows]="5">
+    <p-table [value]="listaEjercicios" [paginator]="true" [rows]="15">
         <ng-template pTemplate="header">
             <tr >
-                <th pSortableColumn="nombre">ID</th>
                 <th pSortableColumn="correoPersonal">Descripcion</th>
                 <th pSortableColumn="telefono">Musculo Objetivo</th>
                 <th pSortableColumn="descripcion">Parte del cuerpo</th>
+                <th >Gif</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-user>
+        <ng-template pTemplate="body" let-ejercicio>
             <tr>
-                <td>{{ user.nombre }} {{ user.apellido }} </td>
-                <td>{{ user.correoPersonal }}</td>
-                <td>{{ user.telefono }}</td>
-                <td> {{user.estado.descripcion | titlecase}} </td>
+                <td>{{ ejercicio.descripcion | titlecase}}</td>
+                <td>{{ ejercicio.musculoObjetivo_id.descripcion | titlecase}}</td>
+                <td>{{ ejercicio.parteCuerpo_id.descripcion | titlecase}}</td>
                 <td>
-                    <a [routerLink]="['/inscription/backlog/docs-review/',user.id]" class="flex items-center justify-center gap-2 p-2 rounded-md text-white bg-green-500 transition-colors hover:bg-green-700">
-                        <i class="pi pi-pencil"></i>
-                        Revisar
-                    </a>
+                    <img [src]="ejercicio.urlGif" alt="" width="128" >
+                </td>
+                <td>
+                    <div  class="flex gap-3">
+                        <p-button styleClass="p-button-success" icon="pi pi-pencil"></p-button>
+                        <p-button (onClick)="delete(ejercicio.id)" styleClass="p-button-danger" icon="pi pi-trash"></p-button>
+                    </div>
                 </td>
             </tr>
         </ng-template>
     </p-table>
+</div>
+
+
+<div class="card flex justify-content-center">
+    <p-dialog header="Añadir nuevo ejercicio" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <div>
+            <form action="" [formGroup]="ejerciciosForm" (ngSubmit)="registrar()">
+                <div class="mb-4 p-fluid">
+                    <label for="">Nombre del ejercicio</label>
+                    <input pInputText placeholder="Descripcion del ejercicio" formControlName="descripcion" >
+                </div>
+                <div class="mb-4 p-fluid">
+                    <label for="">Url del gif</label>
+                    <input pInputText placeholder="url del gif" formControlName="url" >
+                </div>
+                <label for="">Musculo objetivo del ejercicio</label>
+                <div class="w-full border border-black rounded-md mb-4">
+                    <select formControlName="musculo"  class="cursor-pointer block w-full px-2 py-1 text-base border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                        <option [value]="musculo.id" *ngFor="let musculo of musculosObjetivo" > 
+                            {{musculo.descripcion}}
+                        </option>
+                    </select>
+                </div>
+                <label for="">Parte especifica del cuerpo que se entrena</label>
+                <div class="w-full border border-black rounded-md mb-4">
+                    <select formControlName="parteCuerpo"  class="cursor-pointer block w-full px-2 py-1 text-base border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                        <option [value]="parte.id" *ngFor="let parte of partesDelCuerpo" > 
+                            {{parte.descripcion}}
+                        </option>
+                    </select>
+                </div>
+                <p-button type="submit" label="registrar"></p-button>
+            </form>
+        </div>
+    </p-dialog>
 </div>
 
