@@ -1,24 +1,68 @@
 <div class="p-4">
 
-    <div>
+    <div class="mb-4">
         <h2>Listado de rutinas.</h2>
+        <p-button (onClick)="visible = true" label="Crear rutina"></p-button>
     </div>
+
+    <!-- contenedor para las cards del encabezado -->
+  <div>
+    <div
+      class="rounded-md shadow-md p-5 mb-4 bg-white border-l-emerald-600 border-l-4"
+      *ngFor="let rutina of rutinas; index as i"
+    >
+      <!-- Indicadores del cohorte -->
+      <div class="flex items-center justify-between">
+        <span class="inline-block font-bold mb-4">
+          {{ rutina.nombre }}
+        </span>
+        <button class="bg-red-500 text-white hover:bg-red-600 transition-colors py-1 px-6 rounded-md">
+          Ver
+        </button>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 
-<p-dialog header="Añade los ejercicios a la rutian" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Añade los ejercicios a la rutina" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
     <div class="card">
-        <p-pickList [source]="listaEjercicios" [target]="listaEjerciciosRutinas" sourceHeader="Lista de ejercicios" targetHeader="Seleccionados" [dragdrop]="true" 
-            [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }" breakpoint="1400px">
-            <ng-template let-ejercicio pTemplate="item">
-                <div class="flex flex-wrap p-2 items-center gap-3 bg-slate-100 rounded-md">
-                    <img class="w-16 rounded-md" src="{{ejercicio.urlGif}}" alt="{item.name}" />
-                    <div class=" flex gap-2">
-                        <span class="font-bold">{{ ejercicio.descripcion }}</span>
-                    </div>
+        <!-- Formulario de las rutinas -->
+        <div>
+            <form [formGroup]="rutinaForm" (ngSubmit)="crearRutina()" autocomplete="off">
+                <div class="mb-4 p-fluid">
+                    <label for="">Nombre de la rutian</label>
+                    <input pInputText placeholder="Rutina de pierna" formControlName="nombre" >
+                    <span *ngIf="isValidField('nombre')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
                 </div>
-            </ng-template>
-        </p-pickList>
+                <div class="mb-4 p-fluid">
+                    <label for="">Descripcion de la rutian</label>
+                    <input pInputText placeholder="Rutina de pierna" formControlName="descripcion" >
+                    <span *ngIf="isValidField('descripcion')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
+                </div>
+                <div>
+                    <h2>Seleccione los ejercicios</h2>
+                    <p-pickList [source]="listaEjercicios" [target]="listaEjerciciosRutinas" sourceHeader="Lista de ejercicios" targetHeader="Seleccionados" [dragdrop]="true" 
+                        [sourceStyle]="{ height: '30rem' }" [targetStyle]="{ height: '30rem' }" breakpoint="1400px">
+                        <ng-template let-ejercicio pTemplate="item">
+                            <div class="flex flex-wrap p-2 items-center gap-3 bg-slate-100 rounded-md">
+                                <img class="w-16 rounded-md" src="{{ejercicio.urlGif}}" alt="{item.name}" />
+                                <div class=" flex gap-2">
+                                    <span class="font-bold">{{ ejercicio.descripcion }}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </div>
+                <p-button type="submit" label="Enviar"></p-button>
+            </form>
+        </div>
     </div>
 </p-dialog>

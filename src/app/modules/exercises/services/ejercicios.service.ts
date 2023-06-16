@@ -36,19 +36,19 @@ export class EjerciciosService {
   }
 
   public createExercise(ejercicio: any){
-    return this.http.post(`${environment.dev}ejercicio`,ejercicio, {headers: this.httpOptions})
+    return this.http.post(`${environment.dev}ejercicios`,ejercicio, {headers: this.httpOptions})
   }
 
   public editExercise(ejercicio:any, id:number){
-    return this.http.put(`${environment.dev}ejercicio/${id}`,ejercicio, {headers: this.httpOptions})
+    return this.http.put(`${environment.dev}ejercicios/${id}`,ejercicio, {headers: this.httpOptions})
   }
 
   public listExercises(){
-    return this.http.get(`${environment.dev}ejercicio`, {headers: this.httpOptions})
+    return this.http.get(`${environment.dev}ejercicios`, {headers: this.httpOptions})
   }
 
   public listExercisesById(id:number):Observable<Ejercicios>{
-    return this.http.get<Ejercicios>(`${environment.dev}ejercicio/${id}`, {headers: this.httpOptions})
+    return this.http.get<Ejercicios>(`${environment.dev}ejercicios/${id}`, {headers: this.httpOptions})
   }
 
   public delete(id:number){
