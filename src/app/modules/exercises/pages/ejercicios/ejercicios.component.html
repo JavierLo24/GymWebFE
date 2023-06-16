@@ -9,7 +9,7 @@
           </h3>
       </div>
       <div>
-        <p-button (onClick)="visible = true">Añadir ejercicio</p-button>
+        <p-button (onClick)="abrirModal(0)">Añadir ejercicio</p-button>
       </div>
   </div>
 
@@ -17,10 +17,10 @@
     <p-table [value]="listaEjercicios" [paginator]="true" [rows]="15">
         <ng-template pTemplate="header">
             <tr >
-                <th pSortableColumn="correoPersonal">Descripcion</th>
-                <th pSortableColumn="telefono">Musculo Objetivo</th>
-                <th pSortableColumn="descripcion">Parte del cuerpo</th>
-                <th >Gif</th>
+                <th pSortableColumn="descripcion">Descripcion</th>
+                <th pSortableColumn="musculoObjetivo">Musculo Objetivo</th>
+                <th pSortableColumn="parteCuerpo">Parte del cuerpo</th>
+                <th>Gif</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
@@ -34,7 +34,7 @@
                 </td>
                 <td>
                     <div  class="flex gap-3">
-                        <p-button styleClass="p-button-success" icon="pi pi-pencil"></p-button>
+                        <p-button (onClick)="abrirModal(ejercicio.id)" styleClass="p-button-success" icon="pi pi-pencil"></p-button>
                         <p-button (onClick)="delete(ejercicio.id)" styleClass="p-button-danger" icon="pi pi-trash"></p-button>
                     </div>
                 </td>
@@ -45,36 +45,53 @@
 
 
 <div class="card flex justify-content-center">
-    <p-dialog header="Añadir nuevo ejercicio" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <p-dialog [header]="header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
         <div>
-            <form action="" [formGroup]="ejerciciosForm" (ngSubmit)="registrar()">
+            <form [formGroup]="ejerciciosForm" (ngSubmit)="enviarModal()" autocomplete="off">
                 <div class="mb-4 p-fluid">
                     <label for="">Nombre del ejercicio</label>
                     <input pInputText placeholder="Descripcion del ejercicio" formControlName="descripcion" >
+                    <span *ngIf="isValidField('descripcion')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
                 </div>
                 <div class="mb-4 p-fluid">
                     <label for="">Url del gif</label>
-                    <input pInputText placeholder="url del gif" formControlName="url" >
+                    <input pInputText placeholder="URL gif" formControlName="url" >
+                    <span *ngIf="isValidField('url')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
                 </div>
                 <label for="">Musculo objetivo del ejercicio</label>
-                <div class="w-full border border-black rounded-md mb-4">
+                <div class="w-full border rounded-md mb-4">
                     <select formControlName="musculo"  class="cursor-pointer block w-full px-2 py-1 text-base border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                        <option [value]="musculo.id" *ngFor="let musculo of musculosObjetivo" > 
+                        <option [value]="musculo.id" *ngFor="let musculo of musculosObjetivo" >
                             {{musculo.descripcion}}
                         </option>
                     </select>
+                    <span *ngIf="isValidField('musculo')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
                 </div>
                 <label for="">Parte especifica del cuerpo que se entrena</label>
-                <div class="w-full border border-black rounded-md mb-4">
+                <div class="w-full border rounded-md mb-4">
                     <select formControlName="parteCuerpo"  class="cursor-pointer block w-full px-2 py-1 text-base border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                        <option [value]="parte.id" *ngFor="let parte of partesDelCuerpo" > 
+                        <option [value]="parte.id" *ngFor="let parte of partesDelCuerpo" >
                             {{parte.descripcion}}
                         </option>
                     </select>
+                    <span *ngIf="isValidField('parteCuerpo')"
+                          class="text-red-500 font-semibold mb-2">
+                          Este campo es requerido
+                    </span>
                 </div>
-                <p-button type="submit" label="registrar"></p-button>
+                <p-button type="submit" label="Enviar"></p-button>
             </form>
         </div>
     </p-dialog>
 </div>
+
 

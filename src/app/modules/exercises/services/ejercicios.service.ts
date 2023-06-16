@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment.dev';
 import { JwtService } from '../../auth/services/jwt.service';
+import { Ejercicios } from 'src/app/data/interfaces/Ejercicio.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +35,20 @@ export class EjerciciosService {
     return this.http.get(`${environment.dev}musculoObjetivo`, {headers: this.httpOptions})
   }
 
-  public createExercise( ejercicio: any){
-    console.log(ejercicio)
+  public createExercise(ejercicio: any){
     return this.http.post(`${environment.dev}ejercicio`,ejercicio, {headers: this.httpOptions})
+  }
+
+  public editExercise(ejercicio:any, id:number){
+    return this.http.put(`${environment.dev}ejercicio/${id}`,ejercicio, {headers: this.httpOptions})
   }
 
   public listExercises(){
     return this.http.get(`${environment.dev}ejercicio`, {headers: this.httpOptions})
+  }
+
+  public listExercisesById(id:number):Observable<Ejercicios>{
+    return this.http.get<Ejercicios>(`${environment.dev}ejercicio/${id}`, {headers: this.httpOptions})
   }
 
   public delete(id:number){
