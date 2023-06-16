@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
+import { AuthGuard } from './modules/exercises/guards/auth.guard';
 
 const routes: Routes = [
 {
@@ -10,6 +11,7 @@ const routes: Routes = [
 {
   path: 'admin',
   component: DashboardComponent,
+  canActivate: [AuthGuard],
   loadChildren: () => import('./modules/exercises/exercises.module').then(a => a.ExercisesModule),
 },
 {

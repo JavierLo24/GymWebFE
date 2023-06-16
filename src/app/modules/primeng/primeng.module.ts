@@ -9,8 +9,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { PickListModule } from 'primeng/picklist';
-
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   exports:[
@@ -24,7 +24,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     InputNumberModule,
     CardModule,
     PickListModule,
-    DragDropModule
+    DragDropModule,
+    DynamicDialogModule
   ]
 })
 export class PrimengModule { }

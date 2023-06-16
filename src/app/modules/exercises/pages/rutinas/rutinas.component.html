@@ -16,7 +16,7 @@
         <span class="inline-block font-bold mb-4">
           {{ rutina.nombre }}
         </span>
-        <button class="bg-red-500 text-white hover:bg-red-600 transition-colors py-1 px-6 rounded-md">
+        <button (click)="listarEjercicios(rutina.id)" class="bg-red-500 text-white hover:bg-red-600 transition-colors py-1 px-6 rounded-md">
           Ver
         </button>
       </div>
@@ -65,4 +65,27 @@
             </form>
         </div>
     </div>
+</p-dialog>
+
+<p-dialog header="Ejercicios asociados a la rutina" [(visible)]="showEjercicios" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+  <p-table [value]="listaEjerciciosRutina" [paginator]="true" [rows]="15">
+    <ng-template pTemplate="header">
+        <tr >
+            <th pSortableColumn="descripcion">Descripcion</th>
+            <th pSortableColumn="musculoObjetivo">Musculo Objetivo</th>
+            <th pSortableColumn="parteCuerpo">Parte del cuerpo</th>
+            <th>Gif</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ejercicio>
+        <tr>
+            <td>{{ ejercicio.descripcion | titlecase}}</td>
+            <td>{{ ejercicio.musculoObjetivo_id.descripcion | titlecase}}</td>
+            <td>{{ ejercicio.parteCuerpo_id.descripcion | titlecase}}</td>
+            <td>
+                <img [src]="ejercicio.urlGif" alt="" width="128" >
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>  
 </p-dialog>

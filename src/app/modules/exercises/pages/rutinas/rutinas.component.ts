@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EjerciciosService } from '../../services/ejercicios.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RutinaService } from '../../services/rutina.service';
 import Swal from 'sweetalert2';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { EjerciciosComponent } from '../ejercicios/ejercicios.component';
 @Component({
   selector: 'app-rutinas',
   templateUrl: './rutinas.component.html',
-  styleUrls: ['./rutinas.component.css']
+  styleUrls: ['./rutinas.component.css'],
 })
 export class RutinasComponent implements OnInit{
 
   public listaEjercicios: any = [];
+  
+  public listaEjerciciosRutina: any = [];
 
   public listaEjerciciosRutinas: any = [];
 
   public visible = false;
 
   public rutinas:any = []
+
+  public showEjercicios = false;
 
   public rutinaForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]],
@@ -26,7 +32,7 @@ export class RutinasComponent implements OnInit{
   constructor(
     private ejerciciosService:  EjerciciosService,
     private fb: FormBuilder,
-    private rutinaService: RutinaService
+    private rutinaService: RutinaService,
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +43,7 @@ export class RutinasComponent implements OnInit{
       }
     })
   }
+
 
   public listar(){
     this.ejerciciosService.listExercises().subscribe({
@@ -76,4 +83,15 @@ export class RutinasComponent implements OnInit{
   public isValidField(campo: string ): boolean | null  {
     return this.rutinaForm.controls[campo].invalid && this.rutinaForm.controls[campo].touched;
   }
+
+  public listarEjercicios(id:number){
+    this.showEjercicios = true;
+    this.rutinaService.listarEjerciciosPorRutina(id).subscribe({
+      next: res => {
+        this.listaEjerciciosRutina = res;
+      }
+    })
+  }
+
+
 }

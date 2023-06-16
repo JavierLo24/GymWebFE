@@ -24,4 +24,8 @@ export class RutinaService {
   public listarRutinas(){
     return this.http.get(`${environment.dev}rutina`, {headers: this.httpOptions})
   }
+
+  public listarEjerciciosPorRutina(id: number){
+    return this.http.get(`${environment.dev}rutina/ejerciciosRutina/${id}`, {headers: this.httpOptions})
+  }
 }
