@@ -1,0 +1,31 @@
+<header class="flex flex-col w-full max-h-[100px] bg-zinc-500 md:flex-row md:items-center relative z-20">
+  <!-- nombre de la APP -->
+  <div class="text-center flex items-center justify-center md:w-60 h-[50px] ">
+      <span class="block text-white text-2xl font-bold ">POWERGYM</span>
+  </div>
+  <nav class="flex h-[50px] md:w-10/12 ">
+      <!-- logo de las barras -->
+      <div class="flex items-center justify-center h-full" >
+          <button (click)="closeNav()"
+                  class="text-white font-bold flex justify-center items-center w-8 h-full hover:bg-zinc-600 px-6 ">
+              <i class="pi pi-bars"></i>
+          </button>
+      </div>
+      <!-- nombre administrador y la foto -->
+      <div class="ml-auto h-full text-white">
+          <ul class="flex h-full items-center">
+              <li class="flex items-center h-full" >
+                  <a  class="px-4 flex items-center gap-2 w-full h-full">
+                      <img class="inline-block w-6 h-6 rounded-full" src="assets/no-img-user.jpg" alt="">
+                      <span class="hidden md:inline-block"> Administrador </span>
+                  </a>
+              </li>
+              <li class="flex items-center h-full">
+                  <button (click)="logout()" class="px-6 flex items-center justify-center font-bold  w-8 h-full hover:bg-zinc-600" >
+                      <i class="pi pi-sign-out "></i>
+                  </button>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</header>

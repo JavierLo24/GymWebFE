@@ -1,0 +1,151 @@
+<div class="m-2">
+  <!-- title -->
+  <div class="bg-white shadow-md border-t-2 border-zinc-500 rounded-md mb-6">
+    <!-- encabezado -->
+    <div class="border-gray-400 border-b ">
+        <h3 class=" flex items-center text-xl  p-4">
+            <i class="pi pi-users mr-3"></i>
+            Listado de Entrenadores
+        </h3>
+    </div>
+</div>
+  <!-- Tabla de listado de entrenadores -->
+
+  <div class="shadow-lg bg-white">
+    <!-- Contenedor para la tabla -->
+    <div class="py-2">
+      <!-- Contenedor para mostrar las data -->
+      <div class="px-4">
+        <p-table
+        #dt1
+        [value]="trainers"
+        [paginator]="true"
+        [rows]="5"
+        [globalFilterFields]="['nombre']"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                  <button pButton label="Limpiar" class="p-button-secondary" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+              </div>
+              <div>
+                  <button pButton label="Añadir" class="p-button-secondary" icon="pi pi-plus" (click)="triggerModal = true"></button>
+              </div>
+              <div class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="filtrar($event, dt1)" placeholder="Buscar por nombre" />
+              </div>
+          </div>
+      </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th style="width: 5rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user let-i="rowIndex">
+            <tr class="even:bg-slate-300">
+              <!-- Columna solo visual para tener el conteo de auxiliares -->
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.nombre}}</td>
+              <td>{{ user.correo }}</td>
+              <td class="flex justify-start gap-2 flex-row">
+                <button pButton label="Eliminar"
+                  (click)="deleteTrainers(user.correo)"
+                  class="p-button-danger"
+                  icon="pi pi-trash">
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <!-- Contenedor para el contador del total de entrenadores -->
+        <div class="py-4">
+          <p class="font-semibold">
+            Total de Entrenadores: {{ trainers.length }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contenedor del modal -->
+<div class="bodylog">
+<div
+  class="bg-gray-500/30 w-full min-h-[100%] modal absolute z-50 top-0 left-0 flex items-center justify-center transition-transform"
+  *ngIf="triggerModal"
+>
+  <!-- Contenedor de la informacion del modal -->
+  <div class="w-11/12 bg-white max-w-[600px] rounded-md">
+    <!-- Encabezado -->
+    <div class="border-b">
+      <h2 class="text-2xl font-bold p-4">Registrar Entrenador</h2>
+    </div>
+    <!-- Formulario de registro -->
+    <div class="p-4">
+      <form [formGroup]="registerForm">
+        <div class="mb-10">
+          <!-- Nombre -->
+          <div class="mb-4">
+            <label for="nombre" class="py-3 font-bold">Nombre</label>
+            <input
+              formControlName="nombre"
+              type="nombre"
+              id="nombre"
+              placeholder="Nombre"
+              class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
+            />
+          </div>
+          <!-- Correo -->
+          <div class="mb-4">
+            <label for="email" class="py-3 font-bold">Correo</label>
+            <input
+              formControlName="email"
+              type="email"
+              id="email"
+              placeholder="a@a.com"
+              class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
+            />
+          </div>
+          <!-- Contraseña -->
+          <div class="mb-4">
+            <label for="password" class="py-3 font-bold"
+              >Contraseña del Entrenador</label
+            >
+            <input
+              formControlName="password"
+              type="password"
+              id="password"
+              placeholder="*******"
+              class="block w-full my-3 py-3 px-4 rounded-md border shadow-lg transition-colors outline-none inputPersonal"
+            />
+          </div>
+        </div>
+        <!-- botones de acciones -->
+        <div class="flex justify-between">
+          <button
+            class="py-2 px-6 transition-colors text-white rounded-md"
+            [disabled]="registerForm.invalid"
+            [ngClass]="{
+              'bg-gray-300 cursor-not-allowed': registerForm.invalid,
+              'bg-zinc-600 hover:bg-zinc-700 ': !registerForm.invalid
+            }"
+            (click)="saveTrainer()"
+          >
+            Agregar
+          </button>
+          <button
+            class="py-2 px-6 bg-red-600 hover:bg-red-700 transition-colors text-white rounded-md"
+            (click)="triggerModal = false"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

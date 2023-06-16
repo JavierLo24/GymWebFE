@@ -1,0 +1,14 @@
+.bodyLog {
+  background-color: rgba(128, 133, 133, 0.3);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.grid-p {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: center;
+  align-items: center;
+}

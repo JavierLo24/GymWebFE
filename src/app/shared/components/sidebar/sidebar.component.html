@@ -1,0 +1,26 @@
+<div class="w-full min-h-[100%] text-gray-900">
+  <!-- contenedor para la imagen del usuario -->
+  <div class="flex items-start p-6">
+      <!-- w-28 h-28 -->
+      <img class="w-16 h-16 rounded-full border border-black mb-3" src="assets/no-img-user.jpg" alt="sin imagen de perfil">
+      <span class="text-lg font-bold ml-3"> Administrador </span>
+  </div>
+  <!-- contenedor para las opciones -->
+  <div>
+      <div class="text-center">
+          <h3 class="text-xs">Navegacion principal</h3>
+      </div>
+      <ul class="my-6 text-center">
+          <li *ngFor="let item of items">
+                  <a
+                    [routerLink]="item.link"  
+                    routerLinkActive="bg-gray-200"
+                    (click)="item.hidden = !item.hidden"
+                    class="flex items-center justify-between w-full p-3  hover:bg-gray-200 hover:text-black font-semibold hover:font-bold transition-all cursor-pointer">
+                    <span> <i [class]="item.icon" class="mx-3"></i> {{item.title}} </span>
+
+                  </a>
+          </li>
+      </ul>
+  </div>
+</div>
